@@ -6,7 +6,7 @@ import styles from '../../styles/Post.module.css'
 
 
 export async function getStaticProps(){
-    const markDownData = getSortedMarkdownData('pages/reviews')
+    const markDownData = getSortedMarkdownData('reviews')
     return {
         props : { markDownData }
     }
@@ -20,7 +20,7 @@ const ReviewHome = ({markDownData}) => {
             </h1>
             <ul className={styles.list}>
             {markDownData.map(({id,date,title}) => (
-                <li>
+                <li key={id}>
                 <div>
                     <Link href={`reviews/${id}`}>
                     <a>

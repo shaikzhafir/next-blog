@@ -4,7 +4,7 @@ import Link from 'next/link'
 import styles from '../../styles/Post.module.css'
 
 export async function getStaticProps(){
-    const markDownData = getSortedMarkdownData('pages/posts')
+    const markDownData = getSortedMarkdownData('posts')
     return {
         props : { markDownData }
     }
@@ -18,7 +18,7 @@ const PostHome = ({markDownData}) => {
             {markDownData.map(({id,date,title}) => (
                 <li key={id} >
                 <div>
-                    <Link href={`/posts/${id}`}>
+                    <Link href={`posts/${id}`}>
                     <a>
                     <span className={styles.link}>
                     {title},</span>{date}

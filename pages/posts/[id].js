@@ -23,7 +23,7 @@ export default function Post({ postData }) {
 
 export async function getStaticPaths() {
   // Return a list of possible value for id
-  const paths = getAllMarkdownIds("pages/posts");
+  const paths = getAllMarkdownIds("posts");
 
   return {
     paths,
@@ -32,7 +32,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const postData = await getMarkdownData(params.id, "pages/posts");
+  const postData = await getMarkdownData(params.id, "posts");
 
   //by doing this, props will be passwed to the layout somehow
   return {
