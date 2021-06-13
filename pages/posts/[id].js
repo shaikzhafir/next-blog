@@ -1,5 +1,6 @@
 import Layout from "../../components/layout";
 import Link from 'next/link'
+import Twemoji from '../../util/Twemoji'
 import {
   getAllMarkdownIds,
   getMarkdownData,
@@ -8,11 +9,14 @@ import {
 export default function Post({ postData }) {
   return (
     <Layout>
+      <Link href="/">
+                <a><h3>The Bolg</h3></a>
+            </Link>
+            <Link href="../reviews">
+                <a>Back to posts <Twemoji emoji="🧏🏾‍♂️"/></a>
+            </Link>
       <div>
         <h1>{postData.title}</h1>
-        <Link href="/">
-          <a>Back to Home</a>
-        </Link>
         <p>{postData.slug}</p>
       <div dangerouslySetInnerHTML={{ __html: postData.contentHTML }} />
       </div>

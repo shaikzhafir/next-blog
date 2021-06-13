@@ -1,9 +1,9 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
-import Link from 'next/link'
-import utilStyles from '../styles/utils.module.css'
-
+import Head from "next/head";
+import Image from "next/image";
+import styles from "../styles/Home.module.css";
+import Link from "next/link";
+import utilStyles from "../styles/utils.module.css";
+import Twemoji from "../util/Twemoji";
 
 export default function Home() {
   return (
@@ -23,42 +23,35 @@ export default function Home() {
           className={utilStyles.borderCircle}
         />
         <h1 className={styles.title}>
-          Welcome to the Bolg
+          Welcome to the Bolg <Twemoji emoji="😀" />
         </h1>
 
-        
-        <br/><br/>
+        <br />
+        <br />
 
         <div className={styles.flexContainer}>
           <Link href="/reviews">
             <a className={styles.card}>
               <h2>Book Reviews &rarr;</h2>
-              <p>Read my book reviews</p>
+              <p>Read my book <Twemoji emoji="📖" /> reviews</p>
             </a>
           </Link>
 
           <Link href="/posts">
             <a className={styles.card}>
               <h2>Blog &rarr;</h2>
-              <p>Learn about useless things!</p>
+              <p>Learn about useless <Twemoji emoji="🧏🏾‍♂️" /> things!</p>
             </a>
           </Link>
-
         </div>
       </main>
 
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
-      </footer>
+      {/* <footer className={styles.footer}>
+       
+          Powered by Pain
+          
+        
+      </footer> */}
     </div>
-  )
+  );
 }
