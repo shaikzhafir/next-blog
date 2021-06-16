@@ -25,7 +25,7 @@ export default function Home() {
         <h1 className={styles.title}>
           Welcome to the Bolg <Twemoji emoji="😀" />
         </h1>
-
+        <h2>Currently reading: Heaven by Mieko Kawakami</h2>
         <br />
         <br />
 

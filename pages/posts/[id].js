@@ -12,7 +12,7 @@ export default function Post({ postData }) {
       <Link href="/">
                 <a><h3>The Bolg</h3></a>
             </Link>
-            <Link href="../reviews">
+            <Link href="../posts">
                 <a>Back to posts <Twemoji emoji="🧏🏾‍♂️"/></a>
             </Link>
       <div>

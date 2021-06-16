@@ -4,7 +4,7 @@ import Link from 'next/link'
 import Article from '../../components/article'
 import styles from '../../styles/Post.module.css'
 
-export async function getStaticProps(){
+export function getStaticProps(){
     const markDownData = getSortedMarkdownData('posts')
     return {
         props : { markDownData }
