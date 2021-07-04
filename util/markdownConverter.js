@@ -4,7 +4,7 @@ import matter from 'gray-matter'
 import remark from 'remark'
 import html from 'remark-html'
 import post from '../pages/posts'
-
+import prism from 'remark-prism';
 
 
 
@@ -55,6 +55,7 @@ export async function getMarkdownData(id,postType){
 
     const processedContent = await remark()
         .use(html)
+        .use(prism)
         .process(matterResult.content)
     const contentHTML = processedContent.toString()
     

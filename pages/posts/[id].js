@@ -5,8 +5,11 @@ import {
   getAllMarkdownIds,
   getMarkdownData,
 } from "../../util/markdownConverter";
+import 'prismjs/themes/prism-okaidia.css';
 
 export default function Post({ postData }) {
+
+
   return (
     <Layout>
       <Link href="/">
