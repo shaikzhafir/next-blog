@@ -20,9 +20,6 @@ const ReviewHome = ({markDownData}) => {
     return (
         
         <Layout>
-            <Head>
-           
-            </Head>
             <Link href="/">
                 <a><h3>The Bolg</h3></a>
             </Link>
