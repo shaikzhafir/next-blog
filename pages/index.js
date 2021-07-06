@@ -55,12 +55,12 @@ export default function Home() {
         </div>
       </main>
 
-      <footer className={styles.footer}>
+      {/* <footer className={styles.footer}>
        
           <p>Were you expecting a normal copyright thing here? well this blog aint normal</p>
           
         
-      </footer>
+      </footer> */}
     </div>
   );
 }
