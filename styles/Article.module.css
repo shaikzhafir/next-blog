@@ -1,7 +1,11 @@
 .header {
-  font-family: Montserrat, sans-serif;
+  font-family: Segoe UI;
   font-size: 1.75rem;
   margin-bottom: 0.4375rem;
 }
 
 
+.list {
+  padding-left: 0;
+  list-style-type: none;
+}

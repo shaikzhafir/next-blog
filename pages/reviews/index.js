@@ -26,7 +26,7 @@ const ReviewHome = ({markDownData}) => {
             <Link href="/">
                 <a><h3>The Bolg</h3></a>
             </Link>
-            <h1>Here are my book reviews
+            <h1>Here are my book reviews <Twemoji emoji="📜"/>
             </h1>
             <ul className={styles.list}>
             {markDownData.map(({id,date,title,slug}) => (

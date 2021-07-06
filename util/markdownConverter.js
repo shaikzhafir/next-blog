@@ -28,7 +28,10 @@ export function getSortedMarkdownData(postType){
 
     //need to use reverse for sort, doesnt seem to work when swapping a and b 
     return allMarkdownData.filter(markdown => markdown.id && markdown.title && markdown.slug)
-                          .sort((a,b) => new Date(a.date) - new Date(b.date)).reverse()
+                          .sort((a,b) => {
+                            return new Date(b.date) - new Date(a.date)})
+    
+                       
                           
                           
 

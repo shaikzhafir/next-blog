@@ -3,6 +3,7 @@ import Layout from '../../components/layout'
 import Link from 'next/link'
 import Article from '../../components/article'
 import styles from '../../styles/Post.module.css'
+import Twemoji from '../../util/Twemoji'
 
 export function getStaticProps(){
     const markDownData = getSortedMarkdownData('posts')
@@ -16,7 +17,7 @@ const PostHome = ({markDownData}) => {
             <Link href="/">
                 <a><h3>The Bolg</h3></a>
             </Link>
-            <h1>Here are my blog posts
+            <h1>Here are my blog posts <Twemoji emoji="📝"/>
             </h1>
             <ul className={styles.list}>
             {markDownData.map(({id,date,title,slug}) => (

@@ -29,7 +29,8 @@ export default function Post({ postData }) {
 }
 
 export async function getStaticPaths() {
-  // Return a list of possible value for id
+  // Return a list of possible value for id, prebuilt so that vercel is ready to serve the url
+  // the params will be passed to staticprops when visited
   const paths = getAllMarkdownIds("posts");
 
   return {

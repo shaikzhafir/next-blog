@@ -21,11 +21,19 @@ export default function Home() {
           height={144}
           width={144}
           className={utilStyles.borderCircle}
+        /><br></br>
+        <a href="https://github.com/shaikzhafir">
+        <Image
+          priority
+          src="/github.svg"
+          height={30}
+          width={30}
         />
+        </a>
         <h1 className={styles.title}>
           Welcome to the Bolg <Twemoji emoji="😀" />
         </h1>
-        <h2>Currently reading: Heaven by Mieko Kawakami</h2>
+        <h3>Currently rereading: Slaughterhouse-Five by Kurt Vonnegut</h3>
         <br />
         <br />
 
@@ -34,6 +42,7 @@ export default function Home() {
             <a className={styles.card}>
               <h2>Book Reviews &rarr;</h2>
               <p>Read my book <Twemoji emoji="📖" /> reviews</p>
+             
             </a>
           </Link>
 
@@ -46,12 +55,12 @@ export default function Home() {
         </div>
       </main>
 
-      {/* <footer className={styles.footer}>
+      <footer className={styles.footer}>
        
-          Powered by Pain
+          <p>Were you expecting a normal copyright thing here? well this blog aint normal</p>
           
         
-      </footer> */}
+      </footer>
     </div>
   );
 }
