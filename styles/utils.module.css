@@ -27,6 +27,7 @@
   
   .borderCircle {
     border-radius: 9999px;
+    margin-bottom : 1em
   }
   
   .colorInherit {
@@ -51,3 +52,7 @@
     color: #666;
   }
   
+
+  .githubLink {
+    margin-top : 1em
+  }

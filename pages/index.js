@@ -21,8 +21,8 @@ export default function Home() {
           height={144}
           width={144}
           className={utilStyles.borderCircle}
-        /><br></br>
-        <a href="https://github.com/shaikzhafir">
+        /><br></br><br></br>
+        <a href="https://github.com/shaikzhafir" className={utilStyles.githubLink}>
         <Image
           priority
           src="/github.svg"
