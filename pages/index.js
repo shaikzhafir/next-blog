@@ -33,7 +33,7 @@ export default function Home() {
         <h1 className={styles.title}>
           Welcome to the Bolg <Twemoji emoji="😀" />
         </h1>
-        <h3>Currently rereading: Slaughterhouse-Five by Kurt Vonnegut</h3>
+        <h3>Currently reading: Stoner by John Williams</h3>
         <br />
         <br />
 
