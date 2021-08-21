@@ -7,12 +7,20 @@ import post from '../pages/posts'
 import prism from 'remark-prism';
 
 
+//rip onlyfans
+function onlyMDs(file){
+    var x=/^[^.]+.md$/;
+    return x.test(file) 
+}
 
 export function getSortedMarkdownData(postType){
     const markdownDirectory = path.join(process.cwd(),postType)
     const fileNames = fs.readdirSync(markdownDirectory)
-    const allMarkdownData = fileNames.map(fileName => {
+    const allMarkdownData = fileNames.filter(onlyMDs).map(fileName => {
         //regex to remove md extension
+        if (fileName == 'images'){
+            return
+        }
         const id = fileName.replace(/\.md$/,'')
         const fullPath = path.join(markdownDirectory,fileName)
         const fileContents = fs.readFileSync(fullPath,'utf8')
