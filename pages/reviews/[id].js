@@ -1,6 +1,7 @@
 import Layout from "../../components/layout";
-import Link from 'next/link'
-import Twemoji from '../../util/Twemoji'
+import PostHeader from "components/post";
+import Link from "next/link";
+import Twemoji from "../../util/Twemoji";
 import {
   getAllMarkdownIds,
   getMarkdownData,
@@ -10,18 +11,16 @@ export default function Post({ postData }) {
   return (
     <Layout>
       <Link href="/">
-                <a><h3>The Bolg</h3></a>
-            </Link>
-            <Link href="../reviews">
-                <a>Back to reviews <Twemoji emoji="📖"/></a>
-            </Link>
-      <div>
-        <h1>{postData.title}</h1>
-        <p><b>{postData.date}</b></p>
-        <p>{postData.slug}</p>
-      <div dangerouslySetInnerHTML={{ __html: postData.contentHTML }} />
-      </div>
-
+        <a>
+          <h3>The Bolg</h3>
+        </a>
+      </Link>
+      <Link href="../reviews">
+        <a>
+          Back to reviews <Twemoji emoji="📖" />
+        </a>
+      </Link>
+      <PostHeader postData={postData} />
     </Layout>
   );
 }
