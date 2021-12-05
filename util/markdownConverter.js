@@ -13,6 +13,18 @@ function onlyMDs(file){
     return x.test(file) 
 }
 
+
+/*
+
+
+
+
+
+
+
+*/
+
+
 export function getSortedMarkdownData(postType){
     const markdownDirectory = path.join(process.cwd(),postType)
     const fileNames = fs.readdirSync(markdownDirectory)
