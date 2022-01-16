@@ -18,8 +18,11 @@
 }
 
 .flexContainer {
-  display : flex;
-  justify-content : space-around 
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  min-width: 380px;
 }
 
 .footer {
@@ -91,14 +94,13 @@
   text-decoration: none;
   border: 1px solid #eaeaea;
   border-radius: 10px;
-  transition: box-shadow 0.30s ease, border-color 0.15s ease;
+  transition: box-shadow 0.3s ease, border-color 0.15s ease;
   width: 45%;
 }
 
 .card:hover,
 .card:focus,
 .card:active {
-  
   box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
 }
 
@@ -123,4 +125,9 @@
     width: 100%;
     flex-direction: column;
   }
+}
+
+.tabs {
+  display: flex;
+  justify-content: space-around;
 }

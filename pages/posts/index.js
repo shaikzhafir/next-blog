@@ -5,7 +5,7 @@ import Article from "../../components/article";
 import styles from "../../styles/Post.module.css";
 import Twemoji from "../../util/Twemoji";
 import PaginationComponent from "components/pagination";
-import { POSTS_PER_PAGE } from "util/constants";
+import { POSTS_PER_PAGE,bookAuthor,bookTitle,readPercentage } from "util/constants";
 import { useState } from "react";
 
 export function getStaticProps() {

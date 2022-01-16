@@ -4,6 +4,8 @@ import styles from "../styles/Home.module.css";
 import Link from "next/link";
 import utilStyles from "../styles/utils.module.css";
 import Twemoji from "../util/Twemoji";
+import Book from "components/book";
+import { bookAuthor,bookTitle,readPercentage } from "util/constants";
 
 export default function Home() {
   return (
@@ -33,11 +35,18 @@ export default function Home() {
         <h1 className={styles.title}>
           Welcome to the Bolg <Twemoji emoji="😀" />
         </h1>
-        <h3>Currently reading: Debt: The First 5000 Years by David Graeber </h3>
+       
+        
         <br />
         <br />
 
         <div className={styles.flexContainer}>
+          <Book
+          bookTitle={bookTitle}
+          bookAuthor={bookAuthor}
+          readPercentage={readPercentage}
+          />
+          <div className={styles.tabs}>
           <Link href="/reviews">
             <a className={styles.card}>
               <h2>Book Reviews &rarr;</h2>
@@ -45,13 +54,13 @@ export default function Home() {
              
             </a>
           </Link>
-
           <Link href="/posts">
             <a className={styles.card}>
               <h2>Blog &rarr;</h2>
               <p>Learn about useless <Twemoji emoji="🧏🏾‍♂️" /> things!</p>
             </a>
           </Link>
+          </div>
         </div>
       </main>
 
