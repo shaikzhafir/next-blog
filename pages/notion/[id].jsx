@@ -56,7 +56,7 @@ export async function getStaticPaths() {
         post.properties.slug &&
         post.properties.slug.rich_text
       ) {
-        return `/notion/${post.properties.slug.rich_text[0].plain_text}`;
+        return `/notion/${post.properties.slug.rich_text?.[0].plain_text}`;
       }
     })
   );
@@ -81,8 +81,8 @@ export async function getStaticProps({ params }) {
     getPost(matchedPost.id),
     getPostContent(matchedPost.id),
   ]);
-  console.log(JSON.stringify(postData, null, 4));
-  console.log(JSON.stringify(postContent, null, 4));
+  //console.log(JSON.stringify(postData, null, 4));
+  //console.log(JSON.stringify(postContent, null, 4));
   /* console.log(postData);
   console.log(postContent); */
   return {
