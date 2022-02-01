@@ -5,7 +5,7 @@ import Link from "next/link";
 import utilStyles from "../styles/utils.module.css";
 import Twemoji from "../util/Twemoji";
 import Book from "components/book";
-import { bookAuthor,bookTitle,readPercentage } from "util/constants";
+import { bookAuthor, bookTitle, readPercentage } from "util/constants";
 
 export default function Home() {
   return (
@@ -23,43 +23,54 @@ export default function Home() {
           height={144}
           width={144}
           className={utilStyles.borderCircle}
-        /><br></br><br></br>
-        <a href="https://github.com/shaikzhafir" className={utilStyles.githubLink}>
-        <Image
-          priority
-          src="/github.svg"
-          height={30}
-          width={30}
         />
+        <br></br>
+        <br></br>
+        <a
+          href="https://github.com/shaikzhafir"
+          className={utilStyles.githubLink}
+        >
+          <Image priority src="/github.svg" height={30} width={30} />
         </a>
         <h1 className={styles.title}>
           Welcome to the Bolg <Twemoji emoji="😀" />
         </h1>
-       
-        
+
         <br />
         <br />
 
         <div className={styles.flexContainer}>
           <Book
-          bookTitle={bookTitle}
-          bookAuthor={bookAuthor}
-          readPercentage={readPercentage}
+            bookTitle={bookTitle}
+            bookAuthor={bookAuthor}
+            readPercentage={readPercentage}
           />
           <div className={styles.tabs}>
-          <Link href="/reviews">
-            <a className={styles.card}>
-              <h2>Book Reviews &rarr;</h2>
-              <p>Read my book <Twemoji emoji="📖" /> reviews</p>
-             
-            </a>
-          </Link>
-          <Link href="/posts">
-            <a className={styles.card}>
-              <h2>Blog &rarr;</h2>
-              <p>Learn about useless <Twemoji emoji="🧏🏾‍♂️" /> things!</p>
-            </a>
-          </Link>
+            <Link href="/reviews">
+              <a className={styles.card}>
+                <h2>Book Reviews &rarr;</h2>
+                <p>
+                  Read my book <Twemoji emoji="📖" /> reviews
+                </p>
+              </a>
+            </Link>
+            <Link href="/posts">
+              <a className={styles.card}>
+                <h2>Blog &rarr;</h2>
+                <p>
+                  Learn about useless <Twemoji emoji="🧏🏾‍♂️" /> things!
+                </p>
+              </a>
+            </Link>
+            <Link href="/notion">
+              <a className={styles.card}>
+                <h2>Notion Blog &rarr;</h2>
+                <p>
+                  Learn about useless <Twemoji emoji="🧏🏾‍♂️" /> things but using
+                  notion!
+                </p>
+              </a>
+            </Link>
           </div>
         </div>
       </main>
