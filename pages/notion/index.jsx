@@ -33,7 +33,7 @@ const Notion = ({ posts }) => {
 };
 
 export async function getServerSideProps({ req, res }) {
-  //res.setHeader("Cache-Control", "s-maxage=86400");
+  res.setHeader("Cache-Control", "s-maxage=86400");
   const posts = await getPosts();
   //console.log(JSON.stringify(posts, null, 4));
   return { props: { posts } };
