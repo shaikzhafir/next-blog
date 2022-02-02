@@ -1,9 +1,14 @@
 import { compact } from "lodash";
-import { getPosts, getPost, getPostContent } from "util/notionConnection";
+import {
+  getPosts,
+  getPost,
+  getPostContent,
+  getPostById,
+} from "util/notionConnection";
 import Layout from "../../components/layout";
 import Link from "next/link";
 import Twemoji from "../../util/Twemoji";
-import { CopyBlock, dracula, monokai } from "react-code-blocks";
+import NotionBlock from "components/notion/NotionBlock";
 
 const Post = (props) => {
   return (
@@ -20,28 +25,7 @@ const Post = (props) => {
       </Link>
       <h1>{props.slug}</h1>
       {props.postContent.map((block) => {
-        switch (block.type) {
-          case "paragraph":
-            return (
-              <p key={block.id}>
-                {block.paragraph.text.map((text) => {
-                  return text.text.content;
-                })}
-              </p>
-            );
-            break;
-          case "code":
-            return (
-              <CopyBlock
-                language="javascript"
-                key={block.id}
-                theme={monokai}
-                text={block.code.text[0].text.content}
-              />
-            );
-          default:
-            break;
-        }
+        return <NotionBlock slug={props.slug} block={block} />;
       })}
     </Layout>
   );
@@ -76,13 +60,12 @@ export async function getStaticProps({ params }) {
       return post.properties.slug.rich_text?.[0].plain_text === slug;
     }
   });
-
   const [postData, postContent] = await Promise.all([
     getPost(matchedPost.id),
     getPostContent(matchedPost.id),
   ]);
-  //console.log(JSON.stringify(postData, null, 4));
-  //console.log(JSON.stringify(postContent, null, 4));
+  //onsole.log(JSON.stringify(postContent, null, 4));
+  //console.log(JSON.stringify(newPostData, null, 4));
   /* console.log(postData);
   console.log(postContent); */
   return {
