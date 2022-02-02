@@ -17,13 +17,13 @@ const Notion = ({ posts }) => {
           <div className={styles.notionList}>
             <li key={post.id}>
               <Link
-                href={`notion/${post.properties.slug.rich_text[0].plain_text}`}
+                href={`notion/${post.properties.slug.rich_text[0]?.plain_text}`}
               >
                 <a>
-                  <h3>{post.properties.name.title[0].text.content}</h3>
+                  <h3>{post.properties.name.title[0]?.text.content}</h3>
                 </a>
               </Link>
-              <small>{post.properties.published.date.start}</small>
+              <small>{post.properties.published.date?.start}</small>
             </li>
           </div>
         ))}
@@ -33,7 +33,7 @@ const Notion = ({ posts }) => {
 };
 
 export async function getServerSideProps({ req, res }) {
-  res.setHeader("Cache-Control", "s-maxage=86400");
+  //res.setHeader("Cache-Control", "s-maxage=86400");
   const posts = await getPosts();
   //console.log(JSON.stringify(posts, null, 4));
   return { props: { posts } };
