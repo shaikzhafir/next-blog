@@ -40,6 +40,12 @@ const RenderBlock = ({ block }) => {
           id={block.id}
         />
       );
+    case "image":
+      return (
+        <p>
+          -Image block currently not supported due to technical difficulties-
+        </p>
+      );
     default:
       return <p key={block.id}>TODO blocktype implementation lmao</p>;
       break;

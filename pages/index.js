@@ -35,6 +35,9 @@ export default function Home() {
         <h1 className={styles.title}>
           Welcome to the Bolg <Twemoji emoji="😀" />
         </h1>
+        <h3>
+          Now <b>notion</b> powered
+        </h3>
 
         <br />
         <br />
@@ -46,7 +49,7 @@ export default function Home() {
             readPercentage={readPercentage}
           />
           <div className={styles.tabs}>
-            <Link href="/reviews">
+            <Link href="/book-reviews">
               <a className={styles.card}>
                 <h2>Book Reviews &rarr;</h2>
                 <p>
@@ -54,20 +57,11 @@ export default function Home() {
                 </p>
               </a>
             </Link>
-            <Link href="/posts">
+            <Link href="/coding">
               <a className={styles.card}>
                 <h2>Blog &rarr;</h2>
                 <p>
                   Learn about useless <Twemoji emoji="🧏🏾‍♂️" /> things!
-                </p>
-              </a>
-            </Link>
-            <Link href="/notion">
-              <a className={styles.card}>
-                <h2>Notion Blog &rarr;</h2>
-                <p>
-                  Learn about useless <Twemoji emoji="🧏🏾‍♂️" /> things but using
-                  notion!
                 </p>
               </a>
             </Link>
