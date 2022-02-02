@@ -18,12 +18,11 @@ const Post = (props) => {
           <h3>The Bolg</h3>
         </a>
       </Link>
-      <Link href="../notion">
+      <Link href="../book-reviews">
         <a>
-          Back to notion blogs <Twemoji emoji="🧏🏾‍♂️" />
+          Back to book reviews <Twemoji emoji="🧏🏾‍♂️" />
         </a>
       </Link>
-      <h1>{props.slug}</h1>
       {props.postContent.map((block) => {
         return <NotionBlock slug={props.slug} block={block} />;
       })}
@@ -40,7 +39,7 @@ export async function getStaticPaths() {
         post.properties.slug &&
         post.properties.slug.rich_text
       ) {
-        return `/notion/${post.properties.slug.rich_text?.[0].plain_text}`;
+        return `/book-reviews/${post.properties.slug.rich_text?.[0]?.plain_text}`;
       }
     })
   );
