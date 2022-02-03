@@ -1,14 +1,10 @@
 import { compact } from "lodash";
-import {
-  getPosts,
-  getPost,
-  getPostContent,
-  getPostById,
-} from "util/notionConnection";
+import { getPosts, getPostContent } from "util/notionConnection";
 import Layout from "../../components/layout";
 import Link from "next/link";
 import Twemoji from "../../util/Twemoji";
 import NotionBlock from "components/notion/NotionBlock";
+import { server } from "util/server";
 
 const Post = (props) => {
   return (
@@ -52,25 +48,16 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   const slug = params.id;
   const posts = await getPosts();
-
   //get the id of the actual blog page from the slug
   const matchedPost = posts.results.find((post) => {
     if (post && post.properties && post.properties.slug) {
       return post.properties.slug.rich_text?.[0].plain_text === slug;
     }
   });
-  const [postData, postContent] = await Promise.all([
-    getPost(matchedPost.id),
-    getPostContent(matchedPost.id),
-  ]);
-  //onsole.log(JSON.stringify(postContent, null, 4));
-  //console.log(JSON.stringify(newPostData, null, 4));
-  /* console.log(postData);
-  console.log(postContent); */
+  const postContent = await getPostContent(matchedPost.id);
   return {
     props: {
       postId: matchedPost.id,
-      postData,
       postContent,
       slug: slug,
     },

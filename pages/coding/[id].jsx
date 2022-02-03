@@ -1,14 +1,10 @@
 import { compact } from "lodash";
-import {
-  getPosts,
-  getPost,
-  getPostContent,
-  getPostById,
-} from "util/notionConnection";
+import { getPosts, getPostContent } from "util/notionConnection";
 import Layout from "../../components/layout";
 import Link from "next/link";
 import Twemoji from "../../util/Twemoji";
 import NotionBlock from "components/notion/NotionBlock";
+import { server } from "util/server";
 
 const Post = (props) => {
   return (
@@ -32,6 +28,7 @@ const Post = (props) => {
 
 export async function getStaticPaths() {
   const posts = await getPosts();
+  // this is done so the url path is using the slug to make it nicer
   const postSlugs = compact(
     posts.results.map((post) => {
       if (
@@ -52,17 +49,13 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   const slug = params.id;
   const posts = await getPosts();
-
-  //get the id of the actual blog page from the slug
+  //find actual actual blog page from the slug, which is the params
   const matchedPost = posts.results.find((post) => {
     if (post && post.properties && post.properties.slug) {
       return post.properties.slug.rich_text?.[0].plain_text === slug;
     }
   });
-  const [postData, postContent] = await Promise.all([
-    getPost(matchedPost.id),
-    getPostContent(matchedPost.id),
-  ]);
+  const postContent = await getPostContent(matchedPost.id);
   //onsole.log(JSON.stringify(postContent, null, 4));
   //console.log(JSON.stringify(newPostData, null, 4));
   /* console.log(postData);
@@ -70,7 +63,6 @@ export async function getStaticProps({ params }) {
   return {
     props: {
       postId: matchedPost.id,
-      postData,
       postContent,
       slug: slug,
     },

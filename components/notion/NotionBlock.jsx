@@ -11,7 +11,6 @@ const NotionBlock = ({ slug, block }) => {
 };
 
 const RenderBlock = ({ block }) => {
-  console.log(block);
   switch (block.type) {
     case "paragraph":
       return <Paragraph paragraph={block.paragraph} id={block.id} />;
