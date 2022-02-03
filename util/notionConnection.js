@@ -1,12 +1,6 @@
-const { Client } = require("@notionhq/client");
-
-const notionClient = new Client({ auth: process.env.NOTION_KEY });
-
-const databaseId = process.env.NOTION_DATABASE_ID;
-
-export const getPosts = async (preview) => {
+export const getPosts = async (preview, database_id, notionClient) => {
   const query = {
-    database_id: process.env.NOTION_DATABASE_ID,
+    database_id: database_id,
     sorts: [
       {
         property: "published",
@@ -32,16 +26,16 @@ export const getPosts = async (preview) => {
   }
 };
 
-export const getPost = async (id) => {
+/* export const getPost = async (id,notionClient) => {
   try {
     return await notionClient.pages.retrieve({ page_id: id });
   } catch (error) {
     console.error(error.body);
     return {};
   }
-};
+}; */
 
-export const getPostContent = async (id) => {
+export const getPostContent = async (id, notionClient) => {
   const baseQuery = {
     block_id: id,
     page_size: 100,
@@ -60,7 +54,5 @@ export const getPostContent = async (id) => {
 };
 
 export function filterTag(post, tag) {
-  console.log(post);
-  console.log(tag);
   return post.properties.tags.multi_select[0]?.name === tag;
 }

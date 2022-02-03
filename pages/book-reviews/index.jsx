@@ -3,6 +3,7 @@ import { getPosts, filterTag } from "util/notionConnection";
 import Link from "next/link";
 import styles from "../../styles/Post.module.css";
 import Twemoji from "util/Twemoji";
+import { server } from "util/server";
 
 const Notion = ({ posts }) => {
   return (
@@ -38,9 +39,9 @@ const Notion = ({ posts }) => {
   );
 };
 
-export async function getServerSideProps({ req, res }) {
-  res.setHeader("Cache-Control", "s-maxage=1, stale-while-revalidate");
-  const posts = await getPosts();
+export async function getStaticProps() {
+  let apiposts = await fetch(`${server}/api/getPosts`);
+  let posts = await apiposts.json();
   //console.log(JSON.stringify(posts, null, 4));
   return { props: { posts } };
 }

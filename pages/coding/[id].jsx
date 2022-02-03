@@ -9,6 +9,7 @@ import Layout from "../../components/layout";
 import Link from "next/link";
 import Twemoji from "../../util/Twemoji";
 import NotionBlock from "components/notion/NotionBlock";
+import { server } from "util/server";
 
 const Post = (props) => {
   return (
@@ -31,7 +32,10 @@ const Post = (props) => {
 };
 
 export async function getStaticPaths() {
-  const posts = await getPosts();
+  const postsData = await fetch(`${server}/api/getPosts`);
+  const posts = await postsData.json();
+
+  //this is done for seo sake so path can be a nice url lol
   const postSlugs = compact(
     posts.results.map((post) => {
       if (
@@ -51,18 +55,18 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const slug = params.id;
-  const posts = await getPosts();
-
-  //get the id of the actual blog page from the slug
+  const apiposts = await fetch(`${server}/api/getPosts`);
+  const posts = await apiposts.json();
+  //find actual actual blog page from the slug, which is the params
   const matchedPost = posts.results.find((post) => {
     if (post && post.properties && post.properties.slug) {
       return post.properties.slug.rich_text?.[0].plain_text === slug;
     }
   });
-  const [postData, postContent] = await Promise.all([
-    getPost(matchedPost.id),
-    getPostContent(matchedPost.id),
-  ]);
+  const url = `${server}/api/posts/${matchedPost.id}`;
+  console.log(url);
+  const response = await fetch(url);
+  const postContent = await response.json();
   //onsole.log(JSON.stringify(postContent, null, 4));
   //console.log(JSON.stringify(newPostData, null, 4));
   /* console.log(postData);
@@ -70,7 +74,6 @@ export async function getStaticProps({ params }) {
   return {
     props: {
       postId: matchedPost.id,
-      postData,
       postContent,
       slug: slug,
     },
