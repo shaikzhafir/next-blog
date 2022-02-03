@@ -1,10 +1,5 @@
 import { compact } from "lodash";
-import {
-  getPosts,
-  getPost,
-  getPostContent,
-  getPostById,
-} from "util/notionConnection";
+import { getPosts, getPostContent } from "util/notionConnection";
 import Layout from "../../components/layout";
 import Link from "next/link";
 import Twemoji from "../../util/Twemoji";
@@ -32,10 +27,8 @@ const Post = (props) => {
 };
 
 export async function getStaticPaths() {
-  const postsData = await fetch(`${server}/api/getPosts`);
-  const posts = await postsData.json();
-
-  //this is done for seo sake so path can be a nice url lol
+  const posts = await getPosts();
+  // this is done so the url path is using the slug to make it nicer
   const postSlugs = compact(
     posts.results.map((post) => {
       if (
@@ -55,18 +48,14 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const slug = params.id;
-  const apiposts = await fetch(`${server}/api/getPosts`);
-  const posts = await apiposts.json();
+  const posts = await getPosts();
   //find actual actual blog page from the slug, which is the params
   const matchedPost = posts.results.find((post) => {
     if (post && post.properties && post.properties.slug) {
       return post.properties.slug.rich_text?.[0].plain_text === slug;
     }
   });
-  const url = `${server}/api/posts/${matchedPost.id}`;
-  console.log(url);
-  const response = await fetch(url);
-  const postContent = await response.json();
+  const postContent = await getPostContent(matchedPost.id);
   //onsole.log(JSON.stringify(postContent, null, 4));
   //console.log(JSON.stringify(newPostData, null, 4));
   /* console.log(postData);

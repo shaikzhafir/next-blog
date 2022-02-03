@@ -40,8 +40,7 @@ const Notion = ({ posts }) => {
 };
 
 export async function getStaticProps() {
-  let apiposts = await fetch(`${server}/api/getPosts`);
-  let posts = await apiposts.json();
+  let posts = await getPosts();
   //console.log(JSON.stringify(posts, null, 4));
   return { props: { posts } };
 }

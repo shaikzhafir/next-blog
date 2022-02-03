@@ -1,6 +1,10 @@
-export const getPosts = async (preview, database_id, notionClient) => {
+const { Client } = require("@notionhq/client");
+
+export const getPosts = async (preview) => {
+  const notionClient = new Client({ auth: process.env.NOTION_KEY });
+  const databaseId = process.env.NOTION_DATABASE_ID;
   const query = {
-    database_id: database_id,
+    database_id: databaseId,
     sorts: [
       {
         property: "published",
@@ -35,7 +39,8 @@ export const getPosts = async (preview, database_id, notionClient) => {
   }
 }; */
 
-export const getPostContent = async (id, notionClient) => {
+export const getPostContent = async (id) => {
+  const notionClient = new Client({ auth: process.env.NOTION_KEY });
   const baseQuery = {
     block_id: id,
     page_size: 100,

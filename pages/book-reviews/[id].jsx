@@ -1,10 +1,5 @@
 import { compact } from "lodash";
-import {
-  getPosts,
-  getPost,
-  getPostContent,
-  getPostById,
-} from "util/notionConnection";
+import { getPosts, getPostContent } from "util/notionConnection";
 import Layout from "../../components/layout";
 import Link from "next/link";
 import Twemoji from "../../util/Twemoji";
@@ -32,8 +27,7 @@ const Post = (props) => {
 };
 
 export async function getStaticPaths() {
-  const postsData = await fetch(`${server}/api/getPosts`);
-  const posts = await postsData.json();
+  const posts = await getPosts();
   const postSlugs = compact(
     posts.results.map((post) => {
       if (
@@ -53,22 +47,14 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const slug = params.id;
-  const apiposts = await fetch(`${server}/api/getPosts`);
-  const posts = await apiposts.json();
+  const posts = await getPosts();
   //get the id of the actual blog page from the slug
   const matchedPost = posts.results.find((post) => {
     if (post && post.properties && post.properties.slug) {
       return post.properties.slug.rich_text?.[0].plain_text === slug;
     }
   });
-  const url = `${server}/api/posts/${matchedPost.id}`;
-  console.log(url);
-  const response = await fetch(url);
-  const postContent = await response.json();
-  //onsole.log(JSON.stringify(postContent, null, 4));
-  //console.log(JSON.stringify(newPostData, null, 4));
-  /* console.log(postData);
-  console.log(postContent); */
+  const postContent = await getPostContent(matchedPost.id);
   return {
     props: {
       postId: matchedPost.id,
