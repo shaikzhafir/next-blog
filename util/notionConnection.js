@@ -30,14 +30,15 @@ export const getPosts = async (preview) => {
   }
 };
 
-/* export const getPost = async (id,notionClient) => {
+export const getPost = async (id) => {
   try {
+    const notionClient = new Client({ auth: process.env.NOTION_KEY });
     return await notionClient.pages.retrieve({ page_id: id });
   } catch (error) {
     console.error(error.body);
     return {};
   }
-}; */
+};
 
 export const getPostContent = async (id) => {
   const notionClient = new Client({ auth: process.env.NOTION_KEY });

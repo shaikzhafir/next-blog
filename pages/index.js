@@ -5,9 +5,10 @@ import Link from "next/link";
 import utilStyles from "../styles/utils.module.css";
 import Twemoji from "../util/Twemoji";
 import Book from "components/book";
-import { bookAuthor, bookTitle, readPercentage } from "util/constants";
+import { getPost } from "util/notionConnection";
+import cloudinary from "cloudinary";
 
-export default function Home() {
+export default function Home({ author, title, percentage, imageUrl }) {
   return (
     <div className={styles.container}>
       <Head>
@@ -44,9 +45,10 @@ export default function Home() {
 
         <div className={styles.flexContainer}>
           <Book
-            bookTitle={bookTitle}
-            bookAuthor={bookAuthor}
-            readPercentage={readPercentage}
+            bookTitle={title}
+            bookAuthor={author}
+            readPercentage={parseInt(percentage)}
+            imageUrl={imageUrl}
           />
           <div className={styles.tabs}>
             <Link href="/book-reviews">
@@ -77,4 +79,53 @@ export default function Home() {
       </footer> */}
     </div>
   );
+}
+
+export async function getStaticProps() {
+  let page = await getPost(process.env.NOTION_READING_PAGE_ID);
+  let author = page.properties.subtitle.rich_text[0]?.plain_text;
+  let title = page.properties.slug.rich_text[0]?.plain_text;
+  let percentage = page.properties.percentage.rich_text[0]?.plain_text;
+  let notionImageId = page.properties.image_id.rich_text[0]?.plain_text;
+  let notionImageUrl = page.properties.image.files[0].file.url;
+
+  // check if image exists in cloudinary
+  // if exist use that image
+  // else upload the notion image to cloudinary and use the response for the imageurl
+  cloudinary.config({
+    cloud_name: process.env.CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+  });
+  // this is for proper usecase but lets see how it goes to keep uploading hehe
+  /* try {
+    let testimage = await cloudinary.v2.search
+      .expression(`public_id:${notionImageId}`)
+      .execute();
+    console.log(testimage);
+  } catch (error) {
+    console.log(error);
+  } */
+  let image;
+  try {
+    image = await cloudinary.v2.uploader.upload(
+      notionImageUrl,
+      { public_id: notionImageId },
+      function (error, result) {
+        return result;
+      }
+    );
+  } catch (error) {
+    console.log(error);
+  }
+
+  let imageUrl = image?.url ? image.url : "/images/book.png";
+  return {
+    props: {
+      author,
+      title,
+      percentage,
+      imageUrl,
+    },
+  };
 }
