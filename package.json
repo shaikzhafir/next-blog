@@ -12,6 +12,7 @@
     "@emotion/styled": "^11.6.0",
     "@mui/material": "^5.2.2",
     "@notionhq/client": "^0.4.13",
+    "cloudinary": "^1.28.1",
     "gray-matter": "^4.0.3",
     "lodash": "^4.17.21",
     "next": "10.2.3",

@@ -14,7 +14,6 @@ const RenderBlock = ({ block }) => {
   switch (block.type) {
     case "paragraph":
       return <Paragraph paragraph={block.paragraph} id={block.id} />;
-      break;
     case "code":
       return (
         <SyntaxHighlighter
@@ -47,7 +46,6 @@ const RenderBlock = ({ block }) => {
       );
     default:
       return <p key={block.id}>TODO blocktype implementation lmao</p>;
-      break;
   }
 };
 

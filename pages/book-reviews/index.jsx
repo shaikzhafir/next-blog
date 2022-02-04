@@ -23,13 +23,13 @@ const Notion = ({ posts }) => {
             <div className={styles.notionList}>
               <li key={post.id}>
                 <Link
-                  href={`book-reviews/${post.properties.slug.rich_text[0]?.plain_text}`}
+                  href={`book-reviews/${post.properties.slug?.rich_text[0]?.plain_text}`}
                 >
                   <a>
                     <h3>{post.properties.name.title[0]?.text.content}</h3>
                   </a>
                 </Link>
-                <p>{post.properties.subtitle.rich_text[0]?.plain_text}</p>
+                <p>{post.properties.subtitle?.rich_text[0]?.plain_text}</p>
                 <small>{post.properties.published.date?.start}</small>
               </li>
             </div>

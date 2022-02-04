@@ -5,7 +5,7 @@ const Book = (props) => {
   return (
     <div className={styles.container}>
       <Image
-        src="/images/crying-in-h-mart.jpg"
+        src={props.imageUrl}
         width={200}
         height={200}
         objectFit="contain"
