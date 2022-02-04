@@ -127,5 +127,6 @@ export async function getStaticProps() {
       percentage,
       imageUrl,
     },
+    revalidate: 60,
   };
 }

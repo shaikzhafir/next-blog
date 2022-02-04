@@ -42,7 +42,7 @@ const Notion = ({ posts }) => {
 export async function getStaticProps() {
   let posts = await getPosts();
   //console.log(JSON.stringify(posts, null, 4));
-  return { props: { posts } };
+  return { props: { posts }, revalidate: 60 };
 }
 
 export default Notion;
