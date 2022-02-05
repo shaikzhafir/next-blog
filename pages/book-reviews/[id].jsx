@@ -39,7 +39,6 @@ export async function getStaticPaths() {
       }
     })
   );
-  console.log(postSlugs);
   return {
     paths: postSlugs,
     fallback: "blocking",
