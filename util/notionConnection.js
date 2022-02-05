@@ -30,6 +30,11 @@ export const getPosts = async (preview) => {
   }
 };
 
+export const getFilteredPosts = async (posts, tagToFilter) => {
+  const filteredPosts = posts.filter((post) => filterTag(post, tagToFilter));
+  return filteredPosts;
+};
+
 export const getPost = async (id) => {
   try {
     const notionClient = new Client({ auth: process.env.NOTION_KEY });
