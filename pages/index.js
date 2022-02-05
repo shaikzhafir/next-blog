@@ -89,37 +89,51 @@ export async function getStaticProps() {
   let notionImageId = page.properties.image_id.rich_text[0]?.plain_text;
   let notionImageUrl = page.properties.image.files[0].file.url;
 
-  // check if image exists in cloudinary
-  // if exist use that image
-  // else upload the notion image to cloudinary and use the response for the imageurl
   cloudinary.config({
     cloud_name: process.env.CLOUD_NAME,
     api_key: process.env.CLOUDINARY_API_KEY,
     api_secret: process.env.CLOUDINARY_API_SECRET,
   });
-  // this is for proper usecase but lets see how it goes to keep uploading hehe
-  /* try {
-    let testimage = await cloudinary.v2.search
+  //initiase variables here to access outside of trycatch
+  let getImage;
+  let uploadImage;
+  let image;
+
+  // check if image exists in cloudinary
+  // if exist use that image
+  // else upload the notion image to cloudinary and use the response for the imageurl
+  try {
+    getImage = await cloudinary.v2.search
       .expression(`public_id:${notionImageId}`)
       .execute();
-    console.log(testimage);
-  } catch (error) {
-    console.log(error);
-  } */
-  let image;
-  try {
-    image = await cloudinary.v2.uploader.upload(
-      notionImageUrl,
-      { public_id: notionImageId },
-      function (error, result) {
-        return result;
-      }
-    );
   } catch (error) {
     console.log(error);
   }
+  // if image exists in cloudinary, assign as image
 
-  let imageUrl = image?.url ? image.url : "/images/book.png";
+  if (getImage?.resources[0]?.url) {
+    image = getImage.resources[0].url;
+  }
+  // else upload the image to cloudinary and use the response for the imageurl
+  else {
+    try {
+      uploadImage = await cloudinary.v2.uploader.upload(
+        notionImageUrl,
+        { public_id: notionImageId },
+        function (error, result) {
+          return result;
+        }
+      );
+      if (uploadImage) {
+        image = uploadImage.url;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  // if both getImage and uploadImage are undefined, then use the default image
+  let imageUrl = image ? image : "/images/book.png";
   return {
     props: {
       author,
