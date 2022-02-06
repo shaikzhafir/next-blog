@@ -13,6 +13,7 @@ const NotionBlock = ({ slug, block }) => {
 const RenderBlock = ({ block }) => {
   switch (block.type) {
     case "paragraph":
+      console.log(JSON.stringify(block, null, 4));
       return <Paragraph paragraph={block.paragraph} id={block.id} />;
     case "code":
       return (
@@ -53,7 +54,12 @@ const Paragraph = ({ paragraph, id }) => {
   return (
     <p key={id}>
       {paragraph.text.map((text) => {
-        return text.text.content;
+        let textContent = text.text.content;
+        if (text.annotations.bold) textContent = <b>{textContent}</b>;
+        if (text.annotations.italic) textContent = <i>{textContent}</i>;
+        if (text.annotations.underline) textContent = <u>{textContent}</u>;
+        if (text.annotations.strikethrough) textContent = <s>{textContent}</s>;
+        return textContent;
       })}
     </p>
   );
