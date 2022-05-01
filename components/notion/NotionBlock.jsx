@@ -1,19 +1,22 @@
 import Link from "next/link";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import coldarkDark from "react-syntax-highlighter/dist/cjs/styles/prism/coldark-dark";
+import { server } from "../../util/server";
+import Image from "next/image";
+import { useState, useEffect } from "react";
 
 const NotionBlock = ({ slug, block }) => {
   return (
     <div>
-      <RenderBlock block={block} />
+      <RenderBlock block={block} key={slug} />
     </div>
   );
 };
 
 const RenderBlock = ({ block }) => {
+  //console.log(JSON.stringify(block, null, 4));
   switch (block.type) {
     case "paragraph":
-      console.log(JSON.stringify(block, null, 4));
       return <Paragraph paragraph={block.paragraph} id={block.id} />;
     case "code":
       return (
@@ -40,11 +43,24 @@ const RenderBlock = ({ block }) => {
         />
       );
     case "image":
+      console.log(block.image)
+      let notionImageUrl
+      if (block.image.file) {
+        notionImageUrl = block.image.file.url
+      }
+      else if (block.image.external.url) {
+        notionImageUrl = block.image.external.url
+      }
+      else {
+        notionImageUrl = 'http://4.bp.blogspot.com/-schAhg6joOk/U27Kdt1MfAI/AAAAAAAAVq8/_T1oXM6hPFw/s1600/ping3.png'
+      }
       return (
-        <p>
-          -Image block currently not supported due to technical difficulties-
-        </p>
+        <CloudinaryImage
+          notionImageId={block.id}
+          notionImageUrl={notionImageUrl}
+        />
       );
+
     default:
       return <p key={block.id}>TODO blocktype implementation lmao</p>;
   }
@@ -59,6 +75,13 @@ const Paragraph = ({ paragraph, id }) => {
         if (text.annotations.italic) textContent = <i>{textContent}</i>;
         if (text.annotations.underline) textContent = <u>{textContent}</u>;
         if (text.annotations.strikethrough) textContent = <s>{textContent}</s>;
+        /* if (text.text.link) {
+          textContent = (
+            <Link href={text.text.link.url}>
+              <a style={{ color: "blue" }}>{textContent}</a>
+            </Link>
+          );
+        } */
         return textContent;
       })}
     </p>
@@ -106,4 +129,38 @@ const BulletItem = ({ bulleted_list_item, id }) => {
     </ul>
   );
 };
+
+const CloudinaryImage = ({ notionImageId, notionImageUrl }) => {
+  const [imageUrl, setImageUrl] = useState(notionImageUrl);
+  let query = `${server}/api/convertAndGetImage`;
+  let notionImageBody = {
+    notionImageId: notionImageId,
+    notionImageUrl: notionImageUrl,
+  };
+
+  useEffect(() => {
+    fetch(query, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(notionImageBody),
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        setImageUrl(data.imageUrl);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  return (
+    <img src={imageUrl} width="600px" alt="this is supposed to be an image" srcset="" style={{ objectFit: 'contain' }} />
+
+  );
+};
+
 export default NotionBlock;
