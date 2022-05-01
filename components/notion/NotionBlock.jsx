@@ -43,10 +43,21 @@ const RenderBlock = ({ block }) => {
         />
       );
     case "image":
+      console.log(block.image)
+      let notionImageUrl
+      if (block.image.file) {
+        notionImageUrl = block.image.file.url
+      }
+      else if (block.image.external.url) {
+        notionImageUrl = block.image.external.url
+      }
+      else {
+        notionImageUrl = 'http://4.bp.blogspot.com/-schAhg6joOk/U27Kdt1MfAI/AAAAAAAAVq8/_T1oXM6hPFw/s1600/ping3.png'
+      }
       return (
         <CloudinaryImage
           notionImageId={block.id}
-          notionImageUrl={block.image.file.url}
+          notionImageUrl={notionImageUrl}
         />
       );
 
@@ -147,13 +158,8 @@ const CloudinaryImage = ({ notionImageId, notionImageUrl }) => {
   }, []);
 
   return (
-    <Image
-      src={imageUrl}
-      id={notionImageId}
-      objectFit="contain"
-      width={200}
-      height={200}
-    />
+    <img src={imageUrl} width="600px" alt="this is supposed to be an image" srcset="" style={{ objectFit: 'contain' }} />
+
   );
 };
 
