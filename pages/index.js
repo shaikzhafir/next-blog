@@ -87,7 +87,7 @@ export async function getStaticProps() {
   let title = page.properties.slug.rich_text[0]?.plain_text;
   let percentage = page.properties.percentage.rich_text[0]?.plain_text;
   let notionImageId = page.properties.image_id.rich_text[0]?.plain_text;
-  let notionImageUrl = page.properties.image.files[0].file.url;
+  let notionImageUrl = page.properties.image.files[0]?.file.url;
 
   cloudinary.config({
     cloud_name: process.env.CLOUD_NAME,
