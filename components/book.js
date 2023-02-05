@@ -13,7 +13,7 @@ const Book = (props) => {
       <div>
         <table className={styles.bookInformation}>
           <tr>
-            <th colSpan={2}>Currently Reading</th>
+            <th className="font-bold" colSpan={2}>Currently Reading</th>
           </tr>
           <tr>
             <td>Title:</td>

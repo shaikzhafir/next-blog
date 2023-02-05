@@ -40,8 +40,6 @@ export default function Home({ author, title, percentage, imageUrl }) {
           Now <b>notion</b> powered
         </h3>
 
-        <br />
-        <br />
 
         <div className={styles.flexContainer}>
           <Book
@@ -53,7 +51,7 @@ export default function Home({ author, title, percentage, imageUrl }) {
           <div className={styles.tabs}>
             <Link href="/book-reviews">
               <a className={styles.card}>
-                <h2>Book Reviews &rarr;</h2>
+                <h2 className="font-bold">Book Reviews &rarr;</h2>
                 <p>
                   Read my book <Twemoji emoji="📖" /> reviews
                 </p>
@@ -61,7 +59,7 @@ export default function Home({ author, title, percentage, imageUrl }) {
             </Link>
             <Link href="/coding">
               <a className={styles.card}>
-                <h2>Blog &rarr;</h2>
+                <h2 className="font-bold">Blog &rarr;</h2>
                 <p>
                   Learn about useless <Twemoji emoji="🧏🏾‍♂️" /> things!
                 </p>

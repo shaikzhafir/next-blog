@@ -43,16 +43,15 @@ const RenderBlock = ({ block }) => {
         />
       );
     case "image":
-      console.log(block.image)
-      let notionImageUrl
+      console.log(block.image);
+      let notionImageUrl;
       if (block.image.file) {
-        notionImageUrl = block.image.file.url
-      }
-      else if (block.image.external.url) {
-        notionImageUrl = block.image.external.url
-      }
-      else {
-        notionImageUrl = 'http://4.bp.blogspot.com/-schAhg6joOk/U27Kdt1MfAI/AAAAAAAAVq8/_T1oXM6hPFw/s1600/ping3.png'
+        notionImageUrl = block.image.file.url;
+      } else if (block.image.external.url) {
+        notionImageUrl = block.image.external.url;
+      } else {
+        notionImageUrl =
+          "http://4.bp.blogspot.com/-schAhg6joOk/U27Kdt1MfAI/AAAAAAAAVq8/_T1oXM6hPFw/s1600/ping3.png";
       }
       return (
         <CloudinaryImage
@@ -68,7 +67,7 @@ const RenderBlock = ({ block }) => {
 
 const Paragraph = ({ paragraph, id }) => {
   return (
-    <p key={id}>
+    <p key={id} className="pb-3">
       {paragraph.text.map((text) => {
         let textContent = text.text.content;
         if (text.annotations.bold) textContent = <b>{textContent}</b>;
@@ -90,7 +89,7 @@ const Paragraph = ({ paragraph, id }) => {
 
 const Header1 = ({ heading_1, id }) => {
   return (
-    <h1 key={id}>
+    <h1 className="text-3xl font-bold pt-5 pb-5" key={id}>
       {heading_1.text.map((text) => {
         return text.text.content;
       })}
@@ -100,7 +99,7 @@ const Header1 = ({ heading_1, id }) => {
 
 const Header2 = ({ heading_2, id }) => {
   return (
-    <h2 key={id}>
+    <h2 className="text-2xl font-bold pt-5 pb-5" key={id}>
       {heading_2.text.map((text) => {
         return text.text.content;
       })}
@@ -110,7 +109,7 @@ const Header2 = ({ heading_2, id }) => {
 
 const Header3 = ({ heading_3, id }) => {
   return (
-    <h3 key={id}>
+    <h3 className="text-xl font-bold pt-5 pb-5" key={id}>
       {heading_3.text.map((text) => {
         return text.text.content;
       })}
@@ -120,7 +119,7 @@ const Header3 = ({ heading_3, id }) => {
 
 const BulletItem = ({ bulleted_list_item, id }) => {
   return (
-    <ul key={id} style={{ paddingLeft: "20px" }}>
+    <ul key={id} className="pl-5">
       <li>
         {bulleted_list_item.text.map((text) => {
           return text.text.content;
@@ -158,8 +157,13 @@ const CloudinaryImage = ({ notionImageId, notionImageUrl }) => {
   }, []);
 
   return (
-    <img src={imageUrl} width="600px" alt="this is supposed to be an image" srcset="" style={{ objectFit: 'contain' }} />
-
+    <img
+      src={imageUrl}
+      width="600px"
+      alt="this is supposed to be an image"
+      srcset=""
+      style={{ objectFit: "contain" }}
+    />
   );
 };
 

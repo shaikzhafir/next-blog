@@ -11,12 +11,14 @@ const Post = (props) => {
     <Layout>
       <Link href="/">
         <a>
-          <h3>The Bolg</h3>
+          <p className="text-lg font-bold">The Bolg</p>
         </a>
       </Link>
       <Link href="../book-reviews">
         <a>
-          Back to book reviews <Twemoji emoji="🧏🏾‍♂️" />
+          <p className="mb-5">
+            Back to book reviews <Twemoji emoji="🧏🏾‍♂️" />
+          </p>
         </a>
       </Link>
       {props.postContent.map((block) => {

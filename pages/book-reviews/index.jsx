@@ -20,10 +20,10 @@ const Notion = ({ posts }) => {
     <Layout>
       <Link href="/">
         <a>
-          <h3>The Bolg</h3>
+          <p className="font-bold">The Bolg</p>
         </a>
       </Link>
-      <h1>
+      <h1 className="text-3xl pb-5 font-semibold">
         Here are my book reviews <Twemoji emoji="📜" />
       </h1>
       <ul className={styles.list}>
@@ -34,7 +34,9 @@ const Notion = ({ posts }) => {
                 href={`book-reviews/${post.properties.slug?.rich_text[0]?.plain_text}`}
               >
                 <a>
-                  <h3>{post.properties.name.title[0]?.text.content}</h3>
+                  <p className="text-lg font-bold pb-3">
+                    {post.properties.name.title[0]?.text.content}
+                  </p>
                 </a>
               </Link>
               <p>{post.properties.subtitle?.rich_text[0]?.plain_text}</p>
