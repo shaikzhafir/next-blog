@@ -43,16 +43,14 @@ const RenderBlock = ({ block }) => {
         />
       );
     case "image":
-      console.log(block.image)
-      let notionImageUrl
+      let notionImageUrl;
       if (block.image.file) {
-        notionImageUrl = block.image.file.url
-      }
-      else if (block.image.external.url) {
-        notionImageUrl = block.image.external.url
-      }
-      else {
-        notionImageUrl = 'http://4.bp.blogspot.com/-schAhg6joOk/U27Kdt1MfAI/AAAAAAAAVq8/_T1oXM6hPFw/s1600/ping3.png'
+        notionImageUrl = block.image.file.url;
+      } else if (block.image.external.url) {
+        notionImageUrl = block.image.external.url;
+      } else {
+        notionImageUrl =
+          "http://4.bp.blogspot.com/-schAhg6joOk/U27Kdt1MfAI/AAAAAAAAVq8/_T1oXM6hPFw/s1600/ping3.png";
       }
       return (
         <CloudinaryImage
@@ -75,13 +73,13 @@ const Paragraph = ({ paragraph, id }) => {
         if (text.annotations.italic) textContent = <i>{textContent}</i>;
         if (text.annotations.underline) textContent = <u>{textContent}</u>;
         if (text.annotations.strikethrough) textContent = <s>{textContent}</s>;
-        /* if (text.text.link) {
+        if (text.text.link) {
           textContent = (
             <Link href={text.text.link.url}>
               <a style={{ color: "blue" }}>{textContent}</a>
             </Link>
           );
-        } */
+        }
         return textContent;
       })}
     </p>
@@ -158,8 +156,13 @@ const CloudinaryImage = ({ notionImageId, notionImageUrl }) => {
   }, []);
 
   return (
-    <img src={imageUrl} width="600px" alt="this is supposed to be an image" srcset="" style={{ objectFit: 'contain' }} />
-
+    <img
+      src={imageUrl}
+      width="600px"
+      alt="this is supposed to be an image. refresh and ill assure u it will be. if not. well. i tried."
+      srcset=""
+      style={{ objectFit: "contain" }}
+    />
   );
 };
 
