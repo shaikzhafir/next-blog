@@ -4,6 +4,7 @@ import coldarkDark from "react-syntax-highlighter/dist/cjs/styles/prism/coldark-
 import { server } from "../../util/server";
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import useSWR from "swr";
 
 const NotionBlock = ({ slug, block }) => {
   return (
@@ -128,36 +129,35 @@ const BulletItem = ({ bulleted_list_item, id }) => {
   );
 };
 
+const fetcher = (url, notionBodyData) => {
+  return fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(notionBodyData),
+  }).then((res) => res.json());
+};
+
 const CloudinaryImage = ({ notionImageId, notionImageUrl }) => {
-  const [imageUrl, setImageUrl] = useState(notionImageUrl);
-  let query = `${server}/api/convertAndGetImage`;
+  let query = `/api/convertAndGetImage`;
   let notionImageBody = {
     notionImageId: notionImageId,
     notionImageUrl: notionImageUrl,
   };
 
-  useEffect(() => {
-    fetch(query, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(notionImageBody),
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        setImageUrl(data.imageUrl);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+  // idk wtf is a better syntax than this. but this works. so. yeah.
+  const { data, error, isLoading } = useSWR(
+    [query, notionImageBody],
+    ([query, notionImageBody]) => fetcher(query, notionImageBody)
+  );
+
+  if (error) return <FunnyError />;
+  if (isLoading) return <p>loading...</p>;
 
   return (
     <img
-      src={imageUrl}
+      src={replaceHttpWithHttps(data.imageUrl)}
       width="600px"
       alt="this is supposed to be an image. refresh and ill assure u it will be. if not. well. i tried."
       srcset=""
@@ -165,5 +165,26 @@ const CloudinaryImage = ({ notionImageId, notionImageUrl }) => {
     />
   );
 };
+
+function FunnyError() {
+  return (
+    <div>
+      <p>
+        Something went wrong. I'm not sure what. But it's probably my fault.
+      </p>
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <img src="/images/idk.jpg" alt="" />
+      </div>
+    </div>
+  );
+}
+
+function replaceHttpWithHttps(url) {
+  if (url.startsWith("http://")) {
+    return url.replace("http://", "https://");
+  } else {
+    return url;
+  }
+}
 
 export default NotionBlock;
