@@ -33,10 +33,10 @@ export default function Home({ author, title, percentage, imageUrl }) {
         >
           <Image priority src="/github.svg" height={30} width={30} />
         </a>
-        <h1 className={styles.title}>
+        <h1 className="font-bold text-center">
           Welcome to the Bolg <Twemoji emoji="😀" />
         </h1>
-        <h3>
+        <h3 className="my-5">
           Now <b>notion</b> powered
         </h3>
 

@@ -89,7 +89,7 @@ const Paragraph = ({ paragraph, id }) => {
 
 const Header1 = ({ heading_1, id }) => {
   return (
-    <h1 key={id}>
+    <h1 className="font-bold my-5" key={id}>
       {heading_1.text.map((text) => {
         return text.text.content;
       })}
@@ -99,7 +99,7 @@ const Header1 = ({ heading_1, id }) => {
 
 const Header2 = ({ heading_2, id }) => {
   return (
-    <h2 key={id}>
+    <h2 className="font-bold my-5" key={id}>
       {heading_2.text.map((text) => {
         return text.text.content;
       })}
@@ -109,7 +109,7 @@ const Header2 = ({ heading_2, id }) => {
 
 const Header3 = ({ heading_3, id }) => {
   return (
-    <h3 key={id}>
+    <h3 className="font-bold my-5" key={id}>
       {heading_3.text.map((text) => {
         return text.text.content;
       })}
