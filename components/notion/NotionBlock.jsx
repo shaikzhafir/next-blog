@@ -157,7 +157,7 @@ const CloudinaryImage = ({ notionImageId, notionImageUrl }) => {
 
   return (
     <img
-      src={data.imageUrl}
+      src={replaceHttpWithHttps(data.imageUrl)}
       width="600px"
       alt="this is supposed to be an image. refresh and ill assure u it will be. if not. well. i tried."
       srcset=""
@@ -177,6 +177,14 @@ function FunnyError() {
       </div>
     </div>
   );
+}
+
+function replaceHttpWithHttps(url) {
+  if (url.startsWith("http://")) {
+    return url.replace("http://", "https://");
+  } else {
+    return url;
+  }
 }
 
 export default NotionBlock;
