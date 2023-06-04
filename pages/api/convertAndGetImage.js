@@ -1,7 +1,6 @@
 import cloudinary from "cloudinary";
 
 export default async function (req, res) {
-  console.log(req.body);
   let notionImageId = req.body.notionImageId;
   let notionImageUrl = req.body.notionImageUrl;
   console.log(notionImageId);
