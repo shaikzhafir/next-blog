@@ -19,9 +19,11 @@ const Post = (props) => {
           Back to coding blogs <Twemoji emoji="🧏🏾‍♂️" />
         </a>
       </Link>
-      {props.postContent.map((block) => {
-        return <NotionBlock slug={props.slug} block={block} />;
-      })}
+      <div className="mt-10 mb-20">
+        {props.postContent.map((block) => {
+          return <NotionBlock slug={props.slug} block={block} />;
+        })}
+      </div>
     </Layout>
   );
 };

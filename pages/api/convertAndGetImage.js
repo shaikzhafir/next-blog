@@ -3,8 +3,6 @@ import cloudinary from "cloudinary";
 export default async function (req, res) {
   let notionImageId = req.body.notionImageId;
   let notionImageUrl = req.body.notionImageUrl;
-  console.log(notionImageId);
-  console.log(notionImageUrl);
   if (!notionImageId || !notionImageUrl) {
     res.status(400).json({ error: "Missing required parameters" });
     return;
@@ -34,7 +32,6 @@ export default async function (req, res) {
 
   if (getImage?.resources[0]?.url) {
     image = getImage.resources[0].url;
-    console.log(image);
     res.status(200).json({
       imageUrl: image,
     });
@@ -52,7 +49,6 @@ export default async function (req, res) {
       );
       if (uploadImage) {
         image = uploadImage.url;
-        console.log(image);
         res.status(200).json(image);
         return;
       }
