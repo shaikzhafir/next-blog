@@ -8,7 +8,7 @@ import useSWR from "swr";
 
 const NotionBlock = ({ slug, block }) => {
   return (
-    <div>
+    <div className="">
       <RenderBlock block={block} key={slug} />
     </div>
   );
@@ -21,14 +21,16 @@ const RenderBlock = ({ block }) => {
       return <Paragraph paragraph={block.paragraph} id={block.id} />;
     case "code":
       return (
-        <SyntaxHighlighter
-          language={block.code.language}
-          style={coldarkDark}
-          wrapLines={true}
-          wrapLongLines={true}
-        >
-          {block.code.text[0].text.content}
-        </SyntaxHighlighter>
+        <div className="my-10">
+          <SyntaxHighlighter
+            language={block.code.language}
+            style={coldarkDark}
+            wrapLines={true}
+            wrapLongLines={true}
+          >
+            {block.code.text[0].text.content}
+          </SyntaxHighlighter>
+        </div>
       );
     case "heading_1":
       return <Header1 heading_1={block.heading_1} id={block.id} />;
@@ -119,7 +121,7 @@ const Header3 = ({ heading_3, id }) => {
 
 const BulletItem = ({ bulleted_list_item, id }) => {
   return (
-    <ul key={id} style={{ paddingLeft: "20px" }}>
+    <ul key={id} className="list-disc pl-5">
       <li>
         {bulleted_list_item.text.map((text) => {
           return text.text.content;
@@ -162,6 +164,7 @@ const CloudinaryImage = ({ notionImageId, notionImageUrl }) => {
       alt="this is supposed to be an image. refresh and ill assure u it will be. if not. well. i tried."
       srcset=""
       style={{ objectFit: "contain" }}
+      className="py-20"
     />
   );
 };
@@ -169,9 +172,6 @@ const CloudinaryImage = ({ notionImageId, notionImageUrl }) => {
 function FunnyError() {
   return (
     <div>
-      <p>
-        Something went wrong. I'm not sure what. But it's probably my fault.
-      </p>
       <div style={{ display: "flex", justifyContent: "center" }}>
         <img src="/images/idk.jpg" alt="" />
       </div>
