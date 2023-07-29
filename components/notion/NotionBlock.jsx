@@ -158,14 +158,14 @@ const CloudinaryImage = ({ notionImageId, notionImageUrl }) => {
   if (isLoading) return <p>loading...</p>;
 
   return (
-    <img
-      src={replaceHttpWithHttps(data.imageUrl)}
-      width="600px"
-      alt="this is supposed to be an image. refresh and ill assure u it will be. if not. well. i tried."
-      srcset=""
-      style={{ objectFit: "contain" }}
-      className="py-20"
-    />
+    <div className="w-full flex justify-center">
+      <img
+        src={replaceHttpWithHttps(data.imageUrl)}
+        alt="this is supposed to be an image. refresh and ill assure u it will be. if not. well. i tried."
+        srcset=""
+        className="py-20 sm:max-w-lg"
+      />
+    </div>
   );
 };
 
